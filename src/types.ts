@@ -1,5 +1,5 @@
 export interface User {
-  id: string; // id를 string으로 정의
+  id: string;
   name: string;
   email: string;
 }

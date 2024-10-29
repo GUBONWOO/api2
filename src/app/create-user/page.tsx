@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // useRouter 가져오기
 
 const CreateUser = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); // 비밀번호 상태 추가
   const [role, setRole] = useState('USER');
+
+  const router = useRouter(); // useRouter 훅 사용
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,10 +25,14 @@ const CreateUser = () => {
     if (response.ok) {
       const data = await response.json();
       alert(`사용자 ${data.name}가 성공적으로 추가되었습니다!`);
+
       // 폼 리셋
       setName('');
       setEmail('');
       setPassword(''); // 비밀번호 리셋
+
+      // 사용자 추가 후 페이지 리다이렉트
+      router.push('/'); // 원하는 페이지로 변경
     } else {
       alert('사용자 추가에 실패했습니다.');
     }
